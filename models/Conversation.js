@@ -5,6 +5,9 @@ const ConversationSchema = new mongoose.Schema(
     users: {
       type: Array,
     },
+    startedAt: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

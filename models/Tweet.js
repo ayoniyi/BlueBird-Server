@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 const TweetSchema = new mongoose.Schema(
   {
@@ -24,8 +24,11 @@ const TweetSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    tweetedAt: {
+      type: String,
+    },
   },
-  { timestamps: true },
-)
+  { timestamps: true }
+);
 
-module.exports = mongoose.model('Tweets', TweetSchema)
+module.exports = mongoose.model("Tweets", TweetSchema);

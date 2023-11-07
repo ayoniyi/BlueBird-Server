@@ -41,4 +41,25 @@ router.get("/find/:firstUserId/:secondUserId", async (req, res) => {
   }
 });
 
+// get convo or create new
+router.post("/start/:firstUserId/:secondUserId", async (req, res) => {
+  const conversationExists = await Conversation.findOne({
+    users: { $all: [req.params.firstUserId, req.params.secondUserId] },
+  });
+  if (conversationExists) {
+    res.status(200).json(conversationExists);
+  } else {
+    const newConversation = new Conversation({
+      users: [req.params.firstUserId, req.params.secondUserId],
+      startedAt: req.body.startedAt,
+    });
+    try {
+      const savedConvo = await newConversation.save();
+      res.status(200).json(savedConvo);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+});
+
 module.exports = router;
